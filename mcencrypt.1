@@ -24,15 +24,9 @@ uses post-quantum cryptographic algorithms
 (hash)
 .SH EXAMPLE
 .nf
-#ALICE - creates key-pair (+ sends public-key to BOB)
 umask 077
 mckeypair 5>pk 9>sk
-
-#BOB - creates encrypted tarball (+ sends the encrypted tarball to ALICE)
-(cd somewhere; tar \-vzcf - *) | mcencrypt 4<pk > backup.tar.gz.mc8
-
-#ALICE - decrypts + untar the encrypted tarball
-mcdecrypt 8<sk < backup.tar.gz.mc8 | (cd somewhere; tar -vzxf -)
+echo "ahoj" | mcencrypt 4<pk | mcdecrypt 8<sk
 .fi
 .SH SEE ALSO
 .BR mckeypair (1),
