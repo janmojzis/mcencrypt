@@ -6,7 +6,7 @@ MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".</br>
 ## About
 Simple encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
 The tool in inspirated in
-[encryption systems https://libpqcrypto.org/command.html](https://libpqcrypto.org/command.html),
+[https://libpqcrypto.org/command.html (encryption systems)](https://libpqcrypto.org/command.html),
 uses same commandline interface.
 
 **mckeypair** is used to generate a key pair:
@@ -22,13 +22,6 @@ mcencrypt <message 4<publickey >ciphertext
 mcdecrypt <ciphertext 8<secretkey >message
 ```
 If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.
-
-## Crypto
-mcencrypt uses post-quantum safe crypto-algorithms:
-* **mceliece8192128** public-key algorithm, see [https://classic.mceliece.org](https://classic.mceliece.org)
-* **chacha20** symetric cipher
-* **poly1305** symetric authenticator
-* **SHA512** hash function
 
 ## How it works
 **mckeypair** creates randomly generated a mceliece8192128 secret key, a corresponding public key,
@@ -48,3 +41,10 @@ n BYTES chacha20 encrypted message
 ```
 **mcdecrypt** reads secret key from filedescriptor 8, reads ciphertext and writes message on standard output.
 If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.
+
+## Crypto
+mcencrypt uses post-quantum safe crypto-algorithms:
+* **mceliece8192128** public-key algorithm, see [https://classic.mceliece.org](https://classic.mceliece.org)
+* **chacha20** symetric cipher
+* **poly1305** symetric authenticator
+* **SHA512** hash function
