@@ -1,12 +1,12 @@
 # mcencrypt
-
-The post-quantum ecryption/decryption tool.
+The post-quantum ecryption/decryption tool.</br>
+MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".
 
 ## About
-Simple encryption/decription tool which contains mckeypair,mcencrypt,mcdecrypt.
-The tool in inspirated in
-[https://libpqcrypto.org/command.html](https://libpqcrypto.org/command.html)
-and uses same commandline interface.
+Simple encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
+the tool in inspirated in
+[encryption systems https://libpqcrypto.org/command.html](https://libpqcrypto.org/command.html),
+uses same commandline interface.
 
 **mckeypair** is used to generate a key pair:
 ```
@@ -29,13 +29,21 @@ mcencrypt uses post-quantum safe crypto-algorithms:
 * **poly1305** symetric authenticator
 * **SHA512** hash function
 
-##How it works
+## How it works
 **mckeypair** creates randomly generated a mceliece8192128 secret key and a corresponding public key and
 writes public key on filedescriptor 5 and also writes secret key on filedescriptor 9.
-**mcencrypt** reads public key on filedescriptor 4, reads message on standard input and writes
+```
+14080 BYTES mceliece8192128 secret key
+```
+```
+1357824 BYTES mceliece8192128 public key
+```
+**mcencrypt** reads public key from filedescriptor 4, reads message from standard input and writes
 ciphertext as follows
 ```
-| 240 BYTES mceliece8192128 ciphertext | n-BYTES chacha20 encrypted message | 16BYTES poly1305 authenticator |
+240 BYTES mceliece8192128 ciphertext
+n BYTES chacha20 encrypted message
+16 BYTES poly1305 authenticator
 ```
-**mcdecrypt** reads secret key on filedescriptor 8, reads ciphertext and writes message on standard output.
+**mcdecrypt** reads secret key from filedescriptor 8, reads ciphertext and writes message on standard output.
 If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.

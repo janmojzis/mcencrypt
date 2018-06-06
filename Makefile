@@ -1,4 +1,3 @@
-CC=gcc
 CFLAGS+=-Wall -O3
 
 all:  mcdecrypt mcencrypt mckeypair
