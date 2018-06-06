@@ -47,3 +47,18 @@ mcencrypt uses post-quantum safe crypto-algorithms:
 * **chacha20** symetric cipher
 * **poly1305** symetric authenticator
 * **SHA512** hash function
+
+## Example
+```
+#create key-pair
+umask 077
+mckeypair 5>pk 9>sk
+```
+```
+#encrypt tarball
+(cd somewhere; tar -vjcf - *) | mcencrypt 4<pk > data.tar.bz2.mc8
+```
+```
+#decrypt tarball
+mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
+```
