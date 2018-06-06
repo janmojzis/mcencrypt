@@ -30,7 +30,7 @@ mcencrypt uses post-quantum safe crypto-algorithms:
 * **SHA512** hash function
 
 ## How it works
-**mckeypair** creates randomly generated a mceliece8192128 secret key and a corresponding public key and
+**mckeypair** creates randomly generated a mceliece8192128 secret key, a corresponding public key,
 writes public key on filedescriptor 5 and also writes secret key on filedescriptor 9.
 ```
 14080 BYTES mceliece8192128 secret key
