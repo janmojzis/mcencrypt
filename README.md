@@ -21,7 +21,6 @@ mcencrypt <message 4<publickey >ciphertext
 ```
 mcdecrypt <ciphertext 8<secretkey >message
 ```
-If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.
 
 ## How it works
 **mckeypair** creates randomly generated a mceliece8192128 secret key, a corresponding public key,
