@@ -8,6 +8,7 @@
 #include "checkfd.h"
 #include "memreadall.h"
 #include "readblock.h"
+#include "e.h"
 #include "die.h"
 #include "max.h"
 #include "fsyncfd.h"
