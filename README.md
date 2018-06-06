@@ -5,7 +5,7 @@ MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".</br>
 
 ## About
 Simple encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
-the tool in inspirated in
+The tool in inspirated in
 [encryption systems https://libpqcrypto.org/command.html](https://libpqcrypto.org/command.html),
 uses same commandline interface.
 
