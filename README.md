@@ -1,6 +1,7 @@
 # mcencrypt
 The post-quantum ecryption/decryption tool.</br>
-MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".
+MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".</br>
+[![TravisCI status](https://travis-ci.org/janmojzis/mcencrypt.svg?branch=master)](https://travis-ci.org/janmojzis/mcencrypt)
 
 ## About
 Simple encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
