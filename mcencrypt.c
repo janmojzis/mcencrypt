@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
 
     /* symetric key for authentication */
     memset(g.ak, 0, sizeof g.ak);
-    chacha20_blocks(&g.chacha20ctx, g.ak, g.ak, sizeof g.ak); /* XXX warning - must be power of chacha20_BLOCKBYTES */
+    chacha20_blocks(&g.chacha20ctx, g.ak, g.ak, sizeof g.ak); /* XXX warning - 'sizeof g.ak' must be power of chacha20_BLOCKBYTES */
     poly1305_init(&g.poly1305ctx, g.ak);
     randombytes(g.ak, sizeof g.ak);
 
