@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
         r = readblock(0, g.buf, sizeof g.buf);
         if (r == -1) die_temp(NAME, "read message failed");
         inputlen += r;
-        if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "read message failed"); }
+        if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
         chacha20_blocks(&g.chacha20ctx, g.buf, g.buf, r);
         poly1305_blocks(&g.poly1305ctx, g.buf, r);
         if (writeall(1, g.buf, r) == -1) die_temp(NAME, "write ciphertext failed");
