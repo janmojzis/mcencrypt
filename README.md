@@ -21,3 +21,9 @@ mcencrypt <message 4<publickey >ciphertext
 mcdecrypt <ciphertext 8<secretkey >message
 ```
 If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.
+
+## Crypto
+* **mceliece8192128** post-quantum safe public-key algorithm, see [https://classic.mceliece.org](https://classic.mceliece.org)
+* **chacha20** post-quantum safe symetric cipher
+* **poly1305** post-quantum safe symetric authenticator
+* ***SHA512** post-quantum safe hash function
