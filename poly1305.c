@@ -31,15 +31,15 @@ void poly1305_init(poly1305_ctx *ctx, const unsigned char *k) {
 
     /* h = 0 */
     ctx->h[0] = 0;
-	ctx->h[1] = 0;
-	ctx->h[2] = 0;
-	ctx->h[3] = 0;
-	ctx->h[4] = 0;
+    ctx->h[1] = 0;
+    ctx->h[2] = 0;
+    ctx->h[3] = 0;
+    ctx->h[4] = 0;
 
-	ctx->pad[0] = unpack(k + 16);
-	ctx->pad[1] = unpack(k + 20);
-	ctx->pad[2] = unpack(k + 24);
-	ctx->pad[3] = unpack(k + 28);
+    ctx->pad[0] = unpack(k + 16);
+    ctx->pad[1] = unpack(k + 20);
+    ctx->pad[2] = unpack(k + 24);
+    ctx->pad[3] = unpack(k + 28);
 }
 
 void poly1305_blocks(poly1305_ctx *ctx, const unsigned char *m, unsigned long long n) {
@@ -75,7 +75,7 @@ void poly1305_blocks(poly1305_ctx *ctx, const unsigned char *m, unsigned long lo
         }
         else {
             unsigned char mm[16];
-    		long long i;
+            long long i;
             for (i = 0; i < 16; ++i) mm[i] = 0;
             for (i = 0; i <  n; ++i) mm[i] = m[i];
             mm[i] = 1;

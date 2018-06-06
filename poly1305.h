@@ -5,10 +5,10 @@
 #define poly1305_KEYBYTES 32
 
 typedef struct poly1305_ctx {
-	unsigned long h[5];
-	unsigned long r[5];
-	unsigned long s[5];
-	unsigned long pad[4];
+    unsigned long h[5];
+    unsigned long r[5];
+    unsigned long s[5];
+    unsigned long pad[4];
 } poly1305_ctx;
 
 extern void poly1305_init(poly1305_ctx *, unsigned const char *);

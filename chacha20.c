@@ -148,7 +148,7 @@ void chacha20_init(chacha20_ctx *ctx, unsigned char *k, unsigned char *n) {
     ctx->k[7] = unpack32(k + 28);
     ctx->n[0] = unpack32(n     );
     ctx->n[1] = unpack32(n +  4);
-	ctx->u = 0;
+    ctx->u = 0;
 }
 
 void chacha20_blocks(chacha20_ctx *ctx, unsigned char *c, const unsigned char *m, unsigned long long l) {
