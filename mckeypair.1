@@ -22,9 +22,15 @@ uses post-quantum cryptographic algorithms
 (hash)
 .SH EXAMPLE
 .nf
+#create key-pair
 umask 077
 mckeypair 5>pk 9>sk
-echo "ahoj" | mcencrypt 4<pk | mcdecrypt 8<sk
+
+#encrypt tarball
+(cd somewhere; tar -vjcf - *) | mcencrypt 4<pk > data.tar.bz2.mc8
+
+#decrypt tarball
+mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 .fi
 .SH SEE ALSO
 .BR mcencrypt (1),
