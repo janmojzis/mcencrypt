@@ -1,0 +1,40 @@
+.TH mcdecrypt 1
+.SH NAME
+mcdecrypt \- decrypt ciphertext and recover message
+.SH SYNOPSIS
+.B mcdecrypt <ciphertext 8<secretkey >message
+.SH DESCRIPTION
+.B mcdecrypt
+decrypts a ciphertext
+.B ciphertext
+using secretkey
+.B secretkey
+and recovers message
+.B message
+.sp
+.B mcdecrypt
+uses post-quantum cryptographic algorithms
+.B mceliece8192128
+(public-key decryption),
+.B chacha20
+(symmetric decryption),
+.B poly1305
+(symmetric authentication),
+.B SHA512
+(hash)
+.SH EXAMPLE
+.nf
+#ALICE - creates key-pair (+ sends public-key to BOB)
+umask 077
+mckeypair 5>pk 9>sk
+
+#BOB - creates encrypted tarball (+ sends the encrypted tarball to ALICE)
+(cd somewhere; tar \-vzcf - *) | mcencrypt 4<pk > backup.tar.gz.mc8
+
+#ALICE - decrypts + untar the encrypted tarball
+mcdecrypt 8<sk < backup.tar.gz.mc8 | (cd somewhere; tar -vzxf -)
+.fi
+.SH SEE ALSO
+.BR mckeypair (1),
+.BR mcencrypt (1),
+.BR https://libpqcrypto.org/command.html

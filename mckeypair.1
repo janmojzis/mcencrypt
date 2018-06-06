@@ -1,0 +1,38 @@
+.TH mckeypair 1
+.SH NAME
+mckeypair \- generate a key pair
+.SH SYNOPSIS
+.B mckeypair 5>publickey 9>secretkey
+.SH DESCRIPTION
+.B mckeypair
+randomly generates a secret key 
+.B secretkey 
+and a corresponding public key
+.B publickey
+.sp
+.B mckeypair
+uses post-quantum cryptographic algorithms
+.B mceliece8192128
+(public-key encryption),
+.B chacha20
+(symmetric encryption),
+.B poly1305
+(symmetric authentication),
+.B SHA512
+(hash)
+.SH EXAMPLE
+.nf
+#ALICE - creates key-pair (+ sends public-key to BOB)
+umask 077
+mckeypair 5>pk 9>sk
+
+#BOB - creates encrypted tarball (+ sends the encrypted tarball to ALICE)
+(cd somewhere; tar \-vzcf - *) | mckeypair 4<pk > backup.tar.gz.mc8
+
+#ALICE - decrypts + untar the encrypted tarball
+mcdecrypt 8<sk < backup.tar.gz.mc8 | (cd somewhere; tar -vzxf -)
+.fi
+.SH SEE ALSO
+.BR mcencrypt (1),
+.BR mcdecrypt (1),
+.BR https://libpqcrypto.org/command.html
