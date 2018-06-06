@@ -9,6 +9,7 @@
 #include "memreadall.h"
 #include "readblock.h"
 #include "die.h"
+#include "max.h"
 #include "fsyncfd.h"
 #include "randombytes.h"
 #include "chacha20.h"
@@ -81,7 +82,8 @@ int main(int argc, char **argv) {
         input = buf;
     }
 
-    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) die_perm(NAME, "short ciphertext");
+    if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
+    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) { errno = EPROTO; die_perm(NAME, "short ciphert ext"); }
     inputlen -= crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES;
 
     /* get secret key */
