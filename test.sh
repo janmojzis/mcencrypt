@@ -1,6 +1,60 @@
 #!/bin/sh
 set -e
 
+log="mckeypair - test if mckeypair handles closed filedescriptor 5"
+echo "${log}" 2>&1
+if ./mckeypair 9>sk; then
+  echo "${log} - failed" 2>&1
+  exit 1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
+log="mckeypair - test if mckeypair handles closed filedescriptor 9"
+echo "${log}" 2>&1
+if ./mckeypair 5>pk; then
+  echo "${log} - failed" 2>&1
+  exit 1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
+log="mckeypair - test if mckeypair writes to /dev/null"
+echo "${log}" 2>&1
+if ! ./mckeypair 5>/dev/null 9>/dev/null; then
+  echo "${log} - failed" 2>&1
+  exit 1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
+log="mckeypair - test if mckeypair rejects to write publickey to /dev/full"
+echo "${log}" 2>&1
+if [ -e /dev/full ]; then
+  if ./mckeypair 5>/dev/full 9>/dev/null; then
+    echo "${log} - failed" 2>&1
+    exit 1
+  fi
+else
+  echo 'mckeypair: fatal: write publickey failed: out of disk space' 2>&1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
+log="mckeypair - test if mckeypair rejects to write secretkey to /dev/full"
+echo "${log}" 2>&1
+if [ -e /dev/full ]; then
+  if ./mckeypair 5>/dev/null 9>/dev/full; then
+    echo "${log} - failed" 2>&1
+    exit 1
+  fi
+else
+  echo 'mckeypair: fatal: write secretkey failed: out of disk space' 2>&1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
+
 #ok test
 for i in 10065 1065 165 65; do
   ./mckeypair 5>pk 9>sk
