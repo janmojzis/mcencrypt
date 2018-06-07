@@ -11,7 +11,7 @@ int checkfd(int fd, short event) {
     int r;
     struct stat st;
 
-    if (fstat(fd, &st) != 0) return 1;
+    if (fstat(fd, &st) != 0) return 0;
 
     p.fd = fd;
     p.events = event;
