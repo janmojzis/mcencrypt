@@ -19,8 +19,4 @@ script:
 
 after_success:
   - cd "$TRAVIS_BUILD_DIR"
-  - ./mckeypair 5>pk 9>sk
-  - dd if=/dev/urandom of=data bs=1 count=65 2>/dev/null
-  - ./mcencrypt 4<pk <data >data.mc8
-  - ./mcdecrypt 8<sk <data.mc8 >data.new
-  - test "`shasum < data.new`" = "`shasum < data`"
+  - ./test.sh
