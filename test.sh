@@ -2,7 +2,7 @@
 set -e
 
 #ok test
-for i in 10065 1065 1065 65; do
+for i in 10065 1065 165 65; do
   ./mckeypair 5>pk 9>sk
   dd if=/dev/urandom of=data "bs=${i}" count=1 2>/dev/null
   ./mcencrypt 4<pk <data >data.mc8
