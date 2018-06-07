@@ -3,7 +3,8 @@ MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".</br>
 [![TravisCI status](https://travis-ci.org/janmojzis/mcencrypt.svg?branch=master)](https://travis-ci.org/janmojzis/mcencrypt)
 
 ## About
-Post-quantum encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
+Post-quantum public-key encryption/decryption tool which uses public key to encrypt
+and secret key to decrypt message. It contains mckeypair,mcencrypt,mcdecrypt.
 The tool in inspirated in
 [https://libpqcrypto.org/command.html (encryption systems)](https://libpqcrypto.org/command.html),
 uses same commandline interface.
@@ -30,22 +31,25 @@ writes public key on filedescriptor 5 and also writes secret key on filedescript
 ```
 1357824 BYTES mceliece8192128 public key
 ```
-**mcencrypt** reads public key from filedescriptor 4, reads message from standard input and writes
-ciphertext as follows
+**mcencrypt** reads mceliece8192128 public key from filedescriptor 4,
+uses KEM (key encapsulation mode) to compute symetric session key and ciphertext.
+Then reads n-BYTES message from standard input, uses chacha20-poly1305 to encrypt and authenticate the message
+and write it on standard output.
 ```
 240 BYTES mceliece8192128 ciphertext
 n BYTES chacha20 encrypted message
 16 BYTES poly1305 authenticator
 ```
-**mcdecrypt** reads secret key from filedescriptor 8, reads ciphertext and writes message on standard output.
+**mcdecrypt** reads mceliece8192128 secret key from filedescriptor 8, 
+uses ciphertext/secret key to compute session key.
+Then reads ciphertext,encrypted message from standard input, uses chacha20-poly1305 to verify,decrypt
+and write the decrypted message on standard output.
 If decryption fails, mcdecrypt produces an empty output, prints an error message on stderr, and exits 100.
 
 ## Crypto
 mcencrypt uses post-quantum safe crypto-algorithms:
-* **mceliece8192128** public-key algorithm, see [https://classic.mceliece.org](https://classic.mceliece.org)
-* **chacha20** symetric cipher
-* **poly1305** symetric authenticator
-* **SHA512** hash function
+* **mceliece8192128 + SHA512** public-key code-based cryptosystem, see [https://classic.mceliece.org](https://classic.mceliece.org)
+* **chacha20-poly1305** symetric encryption/authentication
 
 ## Example
 ```
@@ -60,4 +64,50 @@ mckeypair 5>pk 9>sk
 ```
 #decrypt tarball
 mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
+```
+
+## Speed test
+
+computer
+```
+cat /proc/cpuinfo | grep 'model name' | sort | uniq -c
+     32 model name	: Intel(R) Xeon(R) CPU E5-2630L v3 @ 1.80GHz
+```
+```
+df -h | grep sda5
+/dev/sda5        11T  1.6T  9.4T  14% /
+```
+
+create keys
+```
+time -p mckeypair 5>pk 9>sk
+real 1.44
+user 1.24
+sys 0.20
+```
+
+create 1TB file
+```
+dd if=/dev/urandom of=data bs=1 count=1099511627789 2>/dev/null
+```
+
+encrypt
+```
+time -p mcencrypt <data 4<pk >data.mc8
+real 8650.60
+user 4030.29
+sys 1003.61
+```
+
+decrypt
+```
+time -p mcdecrypt <data.mc8 8<sk >data.new
+real 12071.66
+user 5544.74
+sys 1394.20
+```
+
+compare checksums
+```
+test "`shasum < data`" = "`shasum < data.new`" 
 ```
