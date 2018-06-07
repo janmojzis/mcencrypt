@@ -66,6 +66,11 @@ mckeypair 5>pk 9>sk
 mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 ```
 
+## Implementation notes
+**mceliece8192128** public-domain implementation taken from [https://classic.mceliece.org/software.html](https://classic.mceliece.org/software.html), files
+benes.c, benes.h, bm.c, bm.h, controlbits.c, controlbits.h, decrypt.c, decrypt.h, encrypt.c, encrypt.h, gf.c, gf.h, operations.c, params.h, root.c, root.h, sk_gen.c, sk_gen.h, synd.c, synd.h, transpose.c, transpose.h, util.c, util.h and modified to use SHA512 instead of SHA3256.</br>
+**poly1305** public-domain implementation based on [https://github.com/floodyberry/poly1305-donna](https://github.com/floodyberry/poly1305-donna)
+
 ## 1TB test
 
 computer
