@@ -129,6 +129,7 @@ static void fcename( chacha20_ctx *ctx,             \
                                                     \
         for (j = 0; j < l; ++j) b[j] = m[j];        \
         XORBLOCK(b, b);                             \
+        ++u;                                        \
         for (j = 0; j < l; ++j) c[j] = b[j];        \
     }                                               \
     ctx->u = u;                                     \
