@@ -14,7 +14,8 @@ int checkfd(int fd, short event) {
     for (;;) {
         r = poll(&p, 1, 0);
         if (r == -1) {
-            if (errno == EINVAL) continue;
+            if (errno == EAGAIN) continue;
+            if (errno == EINTR) continue;
         }
         if (r != 1) return 0;
         if (r == 1) break;
