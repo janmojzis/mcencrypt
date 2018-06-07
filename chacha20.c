@@ -153,6 +153,10 @@ void chacha20_init(chacha20_ctx *ctx, unsigned char *k, unsigned char *n) {
 }
 
 void chacha20_blocks(chacha20_ctx *ctx, unsigned char *c, const unsigned char *m, unsigned long long l) {
-    if (sizeof(int) == 4) return int_chacha20_blocks(ctx, c, m, l);
-    return long_chacha20_blocks(ctx, c, m, l);
+    if (sizeof(int) == 4) {
+        int_chacha20_blocks(ctx, c, m, l);
+    }
+    else {
+        long_chacha20_blocks(ctx, c, m, l);
+    }
 }
