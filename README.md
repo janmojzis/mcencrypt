@@ -34,7 +34,7 @@ writes public key on filedescriptor 5 and also writes secret key on filedescript
 **mcencrypt** reads mceliece8192128 public key from filedescriptor 4,
 uses KEM (key encapsulation mode) to compute symetric session key and ciphertext.
 Then reads n-BYTES message from standard input, uses chacha20-poly1305 to encrypt and authenticate the message
-and write it on standard output.
+and writes ciphertext on standard output.
 ```
 240 BYTES mceliece8192128 ciphertext
 n BYTES chacha20 encrypted message
