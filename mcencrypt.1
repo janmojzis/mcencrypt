@@ -11,17 +11,14 @@ using receivers publickey
 .B publickey
 and prints ciphertext
 .B ciphertext
+.SH CIPHERTEXT
+240 BYTES mceliece8192128 ciphertext
 .sp
-.B mcencrypt
-uses post-quantum cryptographic algorithms
-.B mceliece8192128
-(public-key encryption),
-.B chacha20
-(symmetric encryption),
-.B poly1305
-(symmetric authentication),
-.B SHA512
-(hash)
+n BYTES chacha20 encrypted message
+.sp
+16 BYTES poly1305 authenticator
+.SH PUBLIC KEY
+1357824 BYTES mceliece8192128 public key
 .SH EXAMPLE
 .nf
 #create key-pair
@@ -37,4 +34,5 @@ mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 .SH SEE ALSO
 .BR mckeypair (1),
 .BR mcdecrypt (1),
-.BR https://libpqcrypto.org/command.html
+.BR https://libpqcrypto.org/command.html,
+.BR https://classic.mceliece.org

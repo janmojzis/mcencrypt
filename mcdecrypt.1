@@ -12,16 +12,17 @@ using secretkey
 and recovers message
 .B message
 .sp
+If decryption fails,
 .B mcdecrypt
-uses post-quantum cryptographic algorithms
-.B mceliece8192128
-(public-key decryption),
-.B chacha20
-(symmetric decryption),
-.B poly1305
-(symmetric authentication),
-.B SHA512
-(hash)
+produces an empty output, prints an error message on stderr, and exits 100.
+.SH CIPHERTEXT
+240 BYTES mceliece8192128 ciphertext
+.sp
+n BYTES chacha20 encrypted message
+.sp
+16 BYTES poly1305 authenticator
+.SH SECRET KEY
+14080 BYTES mceliece8192128 secret key
 .SH EXAMPLE
 .nf
 #create key-pair
@@ -37,4 +38,5 @@ mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 .SH SEE ALSO
 .BR mckeypair (1),
 .BR mcencrypt (1),
-.BR https://libpqcrypto.org/command.html
+.BR https://libpqcrypto.org/command.html,
+.BR https://classic.mceliece.org

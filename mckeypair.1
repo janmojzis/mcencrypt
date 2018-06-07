@@ -9,17 +9,10 @@ randomly generates a secret key
 .B secretkey 
 and a corresponding public key
 .B publickey
-.sp
-.B mckeypair
-uses post-quantum cryptographic algorithms
-.B mceliece8192128
-(public-key encryption),
-.B chacha20
-(symmetric encryption),
-.B poly1305
-(symmetric authentication),
-.B SHA512
-(hash)
+.SH SECRET KEY
+14080 BYTES mceliece8192128 secret key
+.SH PUBLIC KEY
+1357824 BYTES mceliece8192128 public key
 .SH EXAMPLE
 .nf
 #create key-pair
@@ -35,4 +28,5 @@ mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 .SH SEE ALSO
 .BR mcencrypt (1),
 .BR mcdecrypt (1),
-.BR https://libpqcrypto.org/command.html
+.BR https://libpqcrypto.org/command.html,
+.BR https://classic.mceliece.org
