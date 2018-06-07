@@ -50,7 +50,6 @@ int main(int argc, char **argv) {
     /* KEM - generate ciphertext + symetric key */
     crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk);
     if (writeall(1, g.c, sizeof g.c) == -1) die_temp(NAME, "write ciphertext failed");
-    randombytes(g.c, sizeof g.c);
 
     /* symetric key and nonce for encryption */
     chacha20_init(&g.chacha20ctx, g.k, g.k + chacha20_KEYBYTES);
@@ -61,6 +60,10 @@ int main(int argc, char **argv) {
     chacha20_blocks(&g.chacha20ctx, g.ak, g.ak, sizeof g.ak);
     poly1305_init(&g.poly1305ctx, g.ak);
     randombytes(g.ak, sizeof g.ak);
+
+    /* authenticate ciphertext */
+    poly1305_blocks(&g.poly1305ctx, g.c, sizeof g.c); /* XXX sizeof g.c must be power of 16 */
+    randombytes(g.c, sizeof g.c);
 
     /* read input and write encrypted output */
     for (;;) {

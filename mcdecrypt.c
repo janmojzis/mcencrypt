@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
 
     if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
     if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) { errno = EPROTO; die_perm(NAME, "short ciphert text"); }
-    inputlen -= crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES;
+    inputlen -= poly1305_BYTES;
 
     /* get secret key */
     if (readblock(8, g.sk, sizeof g.sk) != sizeof g.sk) die_temp(NAME, "read secretkey failed");
@@ -95,7 +95,6 @@ int main(int argc, char **argv) {
         randombytes(g.k, sizeof g.k);
     }
     randombytes(g.sk, sizeof g.sk);
-    input += crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES;
 
     /* symetric key and nonce for encryption */
     chacha20_init(&g.chacha20ctx, /* key */g.k, /* nonce */g.k + chacha20_KEYBYTES);
@@ -108,6 +107,9 @@ int main(int argc, char **argv) {
     /* verify authenticator */
     if (poly1305_verify(input + inputlen, input, inputlen, g.ak) != 0) die_perm(NAME, "decryption failed");
     randombytes(g.ak, sizeof g.ak);
+
+    input += crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES;
+    inputlen -= crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES;
 
     /* read encrypted input, decrypt and write output */
     while (inputlen >= sizeof g.output) {
