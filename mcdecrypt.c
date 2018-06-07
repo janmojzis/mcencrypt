@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
     }
 
     if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
-    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) { errno = EPROTO; die_perm(NAME, "short ciphert ext"); }
+    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) { errno = EPROTO; die_perm(NAME, "short ciphert text"); }
     inputlen -= crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES;
 
     /* get secret key */
