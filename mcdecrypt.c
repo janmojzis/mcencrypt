@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 
     /* symetric key for authentication */
     memset(g.ak, 0, sizeof g.ak);
-    chacha20_blocks(&g.chacha20ctx, g.ak, g.ak, sizeof g.ak); /* XXX warning - 'sizeof g.ak' must be power of chacha20_BLOCKBYTES */
+    chacha20_blocks(&g.chacha20ctx, g.ak, g.ak, sizeof g.ak);
 
     /* verify authenticator */
     if (poly1305_verify(input + inputlen, input, inputlen, g.ak) != 0) die_perm(NAME, "decryption failed");
