@@ -48,8 +48,8 @@ If decryption fails, mcdecrypt produces an empty output, prints an error message
 
 ## Crypto
 mcencrypt uses post-quantum safe crypto-algorithms:
-* **mceliece8192128 + SHA512** public-key code-based cryptosystem, see [https://classic.mceliece.org](https://classic.mceliece.org)
-* **chacha20-poly1305** symetric encryption/authentication
+* **mceliece8192128** public-key code-based crypto-system, see [mceliece-20171129.pdf](https://classic.mceliece.org/nist/mceliece-20171129.pdf)
+* **chacha20-poly1305** symetric encryption/authentication, see [chacha-20080128.pdf](https://cr.yp.to/chacha/chacha-20080128.pdf), [poly1305-20041101.pdf](https://cr.yp.to/mac/poly1305-20041101.pdf)
 
 ## Example
 ```
@@ -66,7 +66,7 @@ mckeypair 5>pk 9>sk
 mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 ```
 
-## Speed test
+## 1TB test
 
 computer
 ```
@@ -110,4 +110,10 @@ sys 1394.20
 compare checksums
 ```
 test "`shasum < data`" = "`shasum < data.new`" 
+```
+
+result
+```
+encryption 121MB/s
+decryption 86MB/s
 ```
