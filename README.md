@@ -1,10 +1,9 @@
 # mcencrypt
-The post-quantum ecryption/decryption tool.</br>
 MCENCRYPT is abbreviated from "MCeliece8192128 ENCRYPTion tool".</br>
 [![TravisCI status](https://travis-ci.org/janmojzis/mcencrypt.svg?branch=master)](https://travis-ci.org/janmojzis/mcencrypt)
 
 ## About
-Simple encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
+Post-quantum encryption/decryption tool which contains mckeypair,mcencrypt,mcdecrypt.
 The tool in inspirated in
 [https://libpqcrypto.org/command.html (encryption systems)](https://libpqcrypto.org/command.html),
 uses same commandline interface.
@@ -56,9 +55,9 @@ mckeypair 5>pk 9>sk
 ```
 ```
 #encrypt tarball
-(cd somewhere; tar -vjcf - *) | mcencrypt 4<pk > data.tar.bz2.mc8
+(cd somewhere; tar -vjcf - *) | mcencrypt 4<pk >data.tar.bz2.mc8
 ```
 ```
 #decrypt tarball
-mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
+mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
 ```
