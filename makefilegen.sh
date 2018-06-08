@@ -53,7 +53,7 @@ cp *.c *.h "${build}"
 
     echo "test: test.sh test.exp ${binaries}"
     echo -e "\tsh test.sh >test.out 2>&1"
-    echo -e "\tcmp test.exp test.out"
+    echo -e "\tcmp test.exp test.out || { diff -u test.exp test.out; exit 1; }"
     echo
 
   ) > Makefile

@@ -47,12 +47,12 @@ limits.o: limits.c randombytes.h limits.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c limits.c
 
 mcdecrypt.o: mcdecrypt.c writeall.h checkfd.h memreadall.h readblock.h \
-  e.h die.h max.h limits.h fsyncfd.h randombytes.h chacha20.h poly1305.h \
+  die.h max.h limits.h fsyncfd.h randombytes.h chacha20.h poly1305.h \
   crypto_kem_mceliece8192128sha512.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mcdecrypt.c
 
 mcencrypt.o: mcencrypt.c writeall.h checkfd.h readblock.h fsyncfd.h die.h \
-  max.h limits.h e.h randombytes.h chacha20.h poly1305.h \
+  max.h limits.h randombytes.h chacha20.h poly1305.h \
   crypto_kem_mceliece8192128sha512.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mcencrypt.c
 
@@ -116,5 +116,5 @@ clean:
 
 test: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
 	sh test.sh >test.out 2>&1
-	cmp test.exp test.out
+	cmp test.exp test.out || { diff -u test.exp test.out; exit 1; }
 

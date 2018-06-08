@@ -6,7 +6,6 @@
 #include "die.h"
 #include "max.h"
 #include "limits.h"
-#include "e.h"
 #include "randombytes.h"
 #include "chacha20.h"
 #include "poly1305.h"
@@ -47,7 +46,9 @@ int main(int argc, char **argv) {
     /* get publickey */
     if (!checkfd(4, POLLIN)) die_usage(NAME, "read publickey failed", "<message 4<publickey >ciphertext");
     limits();
-    if (readblock(4, g.pk, sizeof g.pk) != sizeof g.pk) die_temp(NAME, "read publickey failed");
+    r = readblock(4, g.pk, sizeof g.pk);
+    if (r == -1) die_temp(NAME, "read publickey failed");
+    if (r != sizeof g.pk) die_temp(NAME, "read publickey failed: short public key");
 
     /* KEM - generate ciphertext + symetric key */
     crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk);
@@ -72,7 +73,7 @@ int main(int argc, char **argv) {
         r = readblock(0, g.buf, sizeof g.buf);
         if (r == -1) die_temp(NAME, "read message failed");
         inputlen += r;
-        if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
+        if (inputlen > MAX) die_perm(NAME, "read message failed: input message too long");
         chacha20_blocks(&g.chacha20ctx, g.buf, g.buf, r);
         poly1305_blocks(&g.poly1305ctx, g.buf, r);
         if (writeall(1, g.buf, r) == -1) die_temp(NAME, "write ciphertext failed");

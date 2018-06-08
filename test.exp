@@ -8,9 +8,6 @@ mckeypair: usage: mckeypair 5>publickey 9>secretkey
 mckeypair: fatal: write secretkey failed: file descriptor not open
 mckeypair - test if mckeypair handles closed filedescriptor 9 - ok
 
-mckeypair - test if mckeypair writes to /dev/null
-mckeypair - test if mckeypair writes to /dev/null - ok
-
 mckeypair - test if mckeypair rejects to write publickey to /dev/full
 mckeypair: fatal: write publickey failed: out of disk space
 mckeypair - test if mckeypair rejects to write publickey to /dev/full - ok
@@ -19,10 +16,75 @@ mckeypair - test if mckeypair rejects to write secretkey to /dev/full
 mckeypair: fatal: write secretkey failed: out of disk space
 mckeypair - test if mckeypair rejects to write secretkey to /dev/full - ok
 
-test 10065 ok
-test 1065 ok
-test 165 ok
-test 65 ok
-randomreplace test ok
-bad secret-key test ok
-short ciphertext test ok
+mckeypair - test if mckeypair writes to /dev/null
+mckeypair - test if mckeypair writes to /dev/null - ok
+
+mckeypair - test if mckeypair writes to regular file
+mckeypair - test if mckeypair writes to regular file - ok
+
+mcencrypt - test if mcencrypt handles closed filedescriptor 4
+mcencrypt: usage: mcencrypt <message 4<publickey >ciphertext
+mcencrypt: fatal: read publickey failed: file descriptor not open
+mcencrypt - test if mcencrypt handles closed filedescriptor 4 - ok
+
+mcencrypt - test if mcencrypt rejects bad pk
+mcencrypt: fatal: read publickey failed: short public key
+mcencrypt - test if mcencrypt rejects bad pk - ok
+
+mcencrypt - test if mcencrypt rejects bad pk from /dev/null
+mcencrypt: fatal: read publickey failed: short public key
+mcencrypt - test if mcencrypt rejects bad pk from /dev/null - ok
+
+mcencrypt - test if mcencrypt accepts pk from /dev/zero
+mcencrypt - test if mcencrypt accepts pk from /dev/zero - ok
+
+mcencrypt - test if mcencrypt rejects to write to /dev/full
+mcencrypt: fatal: write ciphertext failed: out of disk space
+mcencrypt - test if mcencrypt rejects to write to /dev/full - ok
+
+mcencrypt - test if mcencrypt encrypts the message
+mcencrypt - test if mcencrypt encrypts the message - ok
+
+mcdecrypt - test if mcdecrypt handles closed filedescriptor 8
+mcdecrypt: usage: mcdecrypt <ciphertext 8<secretkey >message
+mcdecrypt: fatal: read secretkey failed: file descriptor not open
+mcdecrypt - test if mcdecrypt handles closed filedescriptor 8 - ok
+
+mcdecrypt - test if mdencrypt rejects bad sk
+mcdecrypt: fatal: read secretkey failed: short secret key
+mcdecrypt - test if mdencrypt rejects bad sk - ok
+
+mcdecrypt - test if mdencrypt rejects bad sk from /dev/null
+mcdecrypt: fatal: read secretkey failed: short secret key
+mcdecrypt - test if mdencrypt rejects bad sk from /dev/null - ok
+
+mcdecrypt - test if mcdecrypt rejects to write to /dev/full
+mcdecrypt: fatal: write message failed: out of disk space
+mcdecrypt - test if mcdecrypt rejects to write to /dev/full - ok
+
+mcdecrypt - test if mdencrypt rejects short ciphertext
+mcdecrypt: fatal: short ciphert text
+mcdecrypt - test if mdencrypt rejects short ciphertext - ok
+
+mdencrypt - test if mcdecrypt decrypts the ciphertext
+mdencrypt - test if mcdecrypt decrypts the ciphertext - ok
+
+mdencrypt - test if data and data.new match
+mdencrypt - test if data and data.new match - ok
+
+mdencrypt - test if mcdecrypt rejects bad ciphertext
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mcdecrypt: fatal: decryption failed
+mdencrypt - test if mcdecrypt rejects bad ciphertext - ok
+
+mcencrypt/mdencrypt - test if mcencrypt/mcdecrypt encrypts/decrypts
+mcencrypt/mdencrypt - test if mcencrypt/mcdecrypt encrypts/decrypts - ok
+

@@ -8,7 +8,6 @@
 #include "checkfd.h"
 #include "memreadall.h"
 #include "readblock.h"
-#include "e.h"
 #include "die.h"
 #include "max.h"
 #include "limits.h"
@@ -65,6 +64,7 @@ void cleanup(void) {
 int main(int argc, char **argv) {
 
     struct stat st;
+    long long r;
 
     if (!checkfd(8, POLLIN)) die_usage(NAME, "read secretkey failed", "<ciphertext 8<secretkey >message");
     limits();
@@ -85,12 +85,14 @@ int main(int argc, char **argv) {
         input = buf;
     }
 
-    if (inputlen > MAX) { errno = EPROTO; die_perm(NAME, "input message too long"); }
-    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) { errno = EPROTO; die_perm(NAME, "short ciphert text"); }
+    if (inputlen > MAX) die_perm(NAME, "input message too long");
+    if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) die_perm(NAME, "short ciphert text");
     inputlen -= poly1305_BYTES;
 
     /* get secret key */
-    if (readblock(8, g.sk, sizeof g.sk) != sizeof g.sk) die_temp(NAME, "read secretkey failed");
+    r = readblock(8, g.sk, sizeof g.sk);
+    if (r == -1) die_temp(NAME, "read secretkey failed");
+    if (r != sizeof g.sk) die_temp(NAME, "read secretkey failed: short secret key");
 
     /* KEM */
     if (crypto_kem_mceliece8192128sha512_dec(g.k, input, g.sk) != 0) {
