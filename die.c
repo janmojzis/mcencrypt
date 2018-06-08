@@ -58,8 +58,6 @@ void die_perm(const char *name, const char *why) {
     outs(name);
     outs(": fatal: ");
     outs(why);
-    outs(": ");
-    outs(e_str(errno));
     outs("\n");
     flush();
     _exit(100);
