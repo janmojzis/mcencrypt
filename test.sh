@@ -221,7 +221,12 @@ for i in 10065 1065 165 65; do
   ./mcencrypt 4<pk <data >data.mc8
   ./mcdecrypt 8<sk <data.mc8 >data.new
   if [ "`shasum < data`" != "`shasum < data.new`" ]; then
-    echo "${log} - failed" 2>&1
+    echo "${log} - failed (mmap)" 2>&1
+    exit 1
+  fi
+  cat data.mc8 | ./mcdecrypt 8<sk >data.new
+  if [ "`shasum < data`" != "`shasum < data.new`" ]; then
+    echo "${log} - failed (maloc)" 2>&1
     exit 1
   fi
 done
