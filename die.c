@@ -46,8 +46,10 @@ void die_temp(const char *name, const char *why) {
     outs(name);
     outs(": fatal: ");
     outs(why);
-    outs(": ");
-    outs(e_str(errno));
+    if (errno) {
+        outs(": ");
+        outs(e_str(errno));
+    }
     outs("\n");
     flush();
     _exit(111);
