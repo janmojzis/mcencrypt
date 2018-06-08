@@ -52,7 +52,7 @@ cp *.c *.h "${build}"
     echo 
 
     echo "test: test.sh test.exp ${binaries}"
-    echo -e "\tsh test.sh >test.out 2>&1"
+    echo -e "\tsh test.sh >test.out 2>&1 || { cat test.out; exit 1; }"
     echo -e "\tcmp test.exp test.out || { diff -u test.exp test.out; exit 1; }"
     echo
 

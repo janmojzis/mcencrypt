@@ -115,6 +115,6 @@ clean:
 	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair
 
 test: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
-	sh test.sh >test.out 2>&1
+	sh test.sh >test.out 2>&1 || { cat test.out; exit 1; }
 	cmp test.exp test.out || { diff -u test.exp test.out; exit 1; }
 
