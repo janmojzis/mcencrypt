@@ -10,7 +10,7 @@ cp *.c *.h "${build}"
 (
   cd "${build}"
   (
-    echo "CC=gcc"
+    #echo "CC=gcc"
     echo "CFLAGS+=-Wall -O3"
     #echo "LDFLAGS+=-lz"
     echo 
@@ -50,6 +50,11 @@ cp *.c *.h "${build}"
     echo "clean:"
     echo -e "\trm -f *.o ${binaries}"
     echo 
+
+    echo "test: test.sh test.exp ${binaries}"
+    echo -e "\tsh test.sh >test.out 2>&1"
+    echo -e "\tcmp test.exp test.out"
+    echo
 
   ) > Makefile
 )

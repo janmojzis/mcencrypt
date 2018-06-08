@@ -1,4 +1,3 @@
-CC=gcc
 CFLAGS+=-Wall -O3
 
 all:  _randreplace mcdecrypt mcencrypt mckeypair
@@ -114,4 +113,8 @@ mckeypair: mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_h
 
 clean:
 	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair
+
+test: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
+	sh test.sh >test.out 2>&1
+	cmp test.exp test.out
 

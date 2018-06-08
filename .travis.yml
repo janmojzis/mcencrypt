@@ -16,7 +16,4 @@ dist: trusty
 script:
   - cd "$TRAVIS_BUILD_DIR"
   - make
-
-after_success:
-  - cd "$TRAVIS_BUILD_DIR"
-  - ./test.sh
+  - make test

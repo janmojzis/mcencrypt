@@ -1,0 +1,28 @@
+mckeypair - test if mckeypair handles closed filedescriptor 5
+mckeypair: usage: mckeypair 5>publickey 9>secretkey
+mckeypair: fatal: write publickey failed: file descriptor not open
+mckeypair - test if mckeypair handles closed filedescriptor 5 - ok
+
+mckeypair - test if mckeypair handles closed filedescriptor 9
+mckeypair: usage: mckeypair 5>publickey 9>secretkey
+mckeypair: fatal: write secretkey failed: file descriptor not open
+mckeypair - test if mckeypair handles closed filedescriptor 9 - ok
+
+mckeypair - test if mckeypair writes to /dev/null
+mckeypair - test if mckeypair writes to /dev/null - ok
+
+mckeypair - test if mckeypair rejects to write publickey to /dev/full
+mckeypair: fatal: write publickey failed: out of disk space
+mckeypair - test if mckeypair rejects to write publickey to /dev/full - ok
+
+mckeypair - test if mckeypair rejects to write secretkey to /dev/full
+mckeypair: fatal: write secretkey failed: out of disk space
+mckeypair - test if mckeypair rejects to write secretkey to /dev/full - ok
+
+test 10065 ok
+test 1065 ok
+test 165 ok
+test 65 ok
+randomreplace test ok
+bad secret-key test ok
+short ciphertext test ok
