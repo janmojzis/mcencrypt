@@ -161,15 +161,6 @@ fi
 echo "${log} - ok" 2>&1
 echo 2>&1
 
-#log="mcdecrypt - test if mcdecrypt accepts pk from /dev/zero"
-#echo "${log}" 2>&1
-#if ! ./mcdecrypt 8</dev/zero < data.mc8 >data.new; then
-#  echo "${log} - failed" 2>&1
-#  exit 1
-#fi
-#echo "${log} - ok" 2>&1
-#echo 2>&1
-
 log="mcdecrypt - test if mcdecrypt rejects to write to /dev/full"
 echo "${log}" 2>&1
 if [ -e /dev/full ]; then
