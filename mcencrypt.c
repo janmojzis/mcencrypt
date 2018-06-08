@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
     limits();
     r = readblock(4, g.pk, sizeof g.pk);
     if (r == -1) die_temp(NAME, "read publickey failed");
-    if (r != sizeof g.pk) die_temp(NAME, "read publickey failed: short public key");
+    if (r != sizeof g.pk) die_perm(NAME, "read publickey failed: short public key");
 
     /* KEM - generate ciphertext + symetric key */
     crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk);
