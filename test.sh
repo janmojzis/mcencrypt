@@ -109,7 +109,7 @@ echo 2>&1
 log="mcencrypt - test if mcencrypt rejects to write to /dev/full"
 echo "${log}" 2>&1
 if [ -e /dev/full ]; then
-  if ! ./mcencrypt 4<pk < data >/dev/full; then
+  if ./mcencrypt 4<pk < data >/dev/full; then
     echo "${log} - failed" 2>&1
     exit 1
   fi
@@ -170,7 +170,7 @@ echo 2>&1
 log="mcdecrypt - test if mcdecrypt rejects to write to /dev/full"
 echo "${log}" 2>&1
 if [ -e /dev/full ]; then
-  if ! ./mcdecrypt 8<sk < data.mc8 >/dev/full; then
+  if ./mcdecrypt 8<sk < data.mc8 >/dev/full; then
     echo "${log} - failed" 2>&1
     exit 1
   fi
