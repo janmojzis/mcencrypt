@@ -15,15 +15,15 @@ and a corresponding public key
 1357824 BYTES mceliece8192128 public key
 .SH EXAMPLE
 .nf
-#create key-pair
+#create key\-pair
 umask 077
 mckeypair 5>pk 9>sk
 
 #encrypt tarball
-(cd somewhere; tar -vjcf - *) | mcencrypt 4<pk > data.tar.bz2.mc8
+(cd somewhere; tar \-vjcf \- *) | mcencrypt 4<pk > data.tar.bz2.mc8
 
 #decrypt tarball
-mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar -vjxf -)
+mcdecrypt 8<sk < data.tar.bz2.mc8 | (cd somewhere; tar \-vjxf \-)
 .fi
 .SH SEE ALSO
 .BR mcencrypt (1),
