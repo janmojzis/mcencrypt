@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+LANG=C
+export LANG
+
 log="mckeypair - test if mckeypair handles closed filedescriptor 5"
 echo "${log}" 2>&1
 if ./mckeypair 9>sk; then
