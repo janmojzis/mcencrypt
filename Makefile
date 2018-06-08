@@ -44,17 +44,20 @@ fsyncfd.o: fsyncfd.c fsyncfd.h
 gf.o: gf.c gf.h params.h randombytes.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c gf.c
 
+limits.o: limits.c randombytes.h limits.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c limits.c
+
 mcdecrypt.o: mcdecrypt.c writeall.h checkfd.h memreadall.h readblock.h \
-  e.h die.h max.h fsyncfd.h randombytes.h chacha20.h poly1305.h \
+  e.h die.h max.h limits.h fsyncfd.h randombytes.h chacha20.h poly1305.h \
   crypto_kem_mceliece8192128sha512.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mcdecrypt.c
 
 mcencrypt.o: mcencrypt.c writeall.h checkfd.h readblock.h fsyncfd.h die.h \
-  max.h e.h randombytes.h chacha20.h poly1305.h \
+  max.h limits.h e.h randombytes.h chacha20.h poly1305.h \
   crypto_kem_mceliece8192128sha512.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mcencrypt.c
 
-mckeypair.o: mckeypair.c writeall.h checkfd.h fsyncfd.h die.h \
+mckeypair.o: mckeypair.c writeall.h checkfd.h fsyncfd.h die.h limits.h \
   randombytes.h crypto_kem_mceliece8192128sha512.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c mckeypair.c
 
@@ -97,17 +100,17 @@ util.o: util.c util.h gf.h params.h
 writeall.o: writeall.c writeall.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c writeall.c
 
-_randreplace: _randreplace.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o _randreplace _randreplace.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+_randreplace: _randreplace.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o _randreplace _randreplace.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
 
-mcdecrypt: mcdecrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mcdecrypt mcdecrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+mcdecrypt: mcdecrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mcdecrypt mcdecrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
 
-mcencrypt: mcencrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mcencrypt mcencrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+mcencrypt: mcencrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mcencrypt mcencrypt.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
 
-mckeypair: mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mckeypair mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+mckeypair: mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mckeypair mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
 
 clean:
 	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair

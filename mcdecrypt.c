@@ -11,6 +11,7 @@
 #include "e.h"
 #include "die.h"
 #include "max.h"
+#include "limits.h"
 #include "fsyncfd.h"
 #include "randombytes.h"
 #include "chacha20.h"
@@ -66,6 +67,7 @@ int main(int argc, char **argv) {
     struct stat st;
 
     if (!checkfd(8, POLLIN)) die_usage(NAME, "read secretkey failed", "<ciphertext 8<secretkey >message");
+    limits();
 
     /* mmap input */
     if (fstat(0, &st) == 0) {

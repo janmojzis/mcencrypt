@@ -5,6 +5,7 @@
 #include "fsyncfd.h"
 #include "die.h"
 #include "max.h"
+#include "limits.h"
 #include "e.h"
 #include "randombytes.h"
 #include "chacha20.h"
@@ -45,6 +46,7 @@ int main(int argc, char **argv) {
 
     /* get publickey */
     if (!checkfd(4, POLLIN)) die_usage(NAME, "read publickey failed", "<message 4<publickey >ciphertext");
+    limits();
     if (readblock(4, g.pk, sizeof g.pk) != sizeof g.pk) die_temp(NAME, "read publickey failed");
 
     /* KEM - generate ciphertext + symetric key */
