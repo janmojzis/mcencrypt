@@ -3,6 +3,7 @@
 #include "die.h"
 #include "writeall.h"
 #include "fsyncfd.h"
+#include "limits.h"
 #include "randombytes.h"
 
 #define NAME "_randreplace"
@@ -22,6 +23,8 @@ int main(int argc, char **argv) {
 
     unsigned long long a;
     unsigned long long b;
+
+    limits();
 
     input = memreadall(&inputlen, 0, 0, 0);
     if (!input) die_temp(NAME, "read message failed");

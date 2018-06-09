@@ -3,7 +3,7 @@ CFLAGS+=-Wall -O3
 all:  _randreplace mcdecrypt mcencrypt mckeypair
 
 _randreplace.o: _randreplace.c memreadall.h die.h writeall.h fsyncfd.h \
-  randombytes.h
+  limits.h randombytes.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c _randreplace.c
 
 benes.o: benes.c util.h gf.h transpose.h params.h
