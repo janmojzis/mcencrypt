@@ -1,4 +1,5 @@
 #include <string.h>
+#include <unistd.h>
 #include "writeall.h"
 #include "checkfd.h"
 #include "readblock.h"
@@ -49,6 +50,7 @@ int main(int argc, char **argv) {
     r = readblock(4, g.pk, sizeof g.pk);
     if (r == -1) die_temp(NAME, "read publickey failed");
     if (r != sizeof g.pk) die_perm(NAME, "read publickey failed: short public key");
+    close(4);
 
     /* KEM - generate ciphertext + symetric key */
     crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk);

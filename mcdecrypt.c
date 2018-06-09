@@ -93,6 +93,7 @@ int main(int argc, char **argv) {
     r = readblock(8, g.sk, sizeof g.sk);
     if (r == -1) die_temp(NAME, "read secretkey failed");
     if (r != sizeof g.sk) die_perm(NAME, "read secretkey failed: short secret key");
+    close(8);
 
     /* KEM */
     if (crypto_kem_mceliece8192128sha512_dec(g.k, input, g.sk) != 0) {
