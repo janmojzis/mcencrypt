@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
         input = buf;
     }
 
-    if (inputlen > MAX) die_perm(NAME, "input message too long");
+    if (inputlen > MAX) die_perm(NAME, "ciphertext too long");
     if (inputlen < crypto_kem_mceliece8192128sha512_CIPHERTEXTBYTES + poly1305_BYTES) die_perm(NAME, "short ciphert text");
     inputlen -= poly1305_BYTES;
 
