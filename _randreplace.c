@@ -20,8 +20,8 @@ void cleanup(void) {
 
 int main(int argc, char **argv) {
 
-    unsigned long a;
-    unsigned long b;
+    unsigned long long a;
+    unsigned long long b;
 
     input = memreadall(&inputlen, 0, 0, 0);
     if (!input) die_temp(NAME, "read message failed");
