@@ -9,21 +9,21 @@ static unsigned char randombyte[1];
 
 void limits(void) {
 
- 	randombytes(randombyte,1);
+    randombytes(randombyte,1);
 
 #ifdef RLIM_INFINITY
-	struct rlimit r;
-	r.rlim_cur = 0;
-	r.rlim_max = 0;
+    struct rlimit r;
+    r.rlim_cur = 0;
+    r.rlim_max = 0;
 
 /* prohibit new files, new sockets, etc. */
 #ifdef RLIMIT_NOFILE
-	setrlimit(RLIMIT_NOFILE, &r);
+    setrlimit(RLIMIT_NOFILE, &r);
 #endif
 
  /* prohibit fork */
 #ifdef RLIMIT_NPROC
-	setrlimit(RLIMIT_NPROC, &r);
+    setrlimit(RLIMIT_NPROC, &r);
 #endif
 
 #endif
