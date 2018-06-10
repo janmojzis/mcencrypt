@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
     close(4);
 
     /* KEM - generate ciphertext + symetric key */
-    crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk);
+    if (crypto_kem_mceliece8192128sha512_enc(g.c, g.k, g.pk) != 0) die_temp(NAME, "encryption failed");
     if (writeall(1, g.c, sizeof g.c) == -1) die_temp(NAME, "write ciphertext failed");
 
     /* symetric key and nonce for encryption */
