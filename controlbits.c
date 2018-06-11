@@ -128,7 +128,7 @@ static void sort_64b(int n, uint64_t x[n])
 /* y[pi[i]] = x[i] */
 /* requires n = 2^w */
 /* requires pi to be a permutation */
-static void composeinv(int n,uint32_t y[n],uint32_t x[n],uint32_t pi[n]) // NC
+static void composeinv(int n,uint32_t y[n],uint32_t x[n],uint32_t pi[n]) /* // NC */
 {
   int i;
   uint32_t t[n];

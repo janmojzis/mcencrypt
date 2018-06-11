@@ -13,7 +13,7 @@ static int irr_gen(gf *out, gf *f)
 	gf mat[ SYS_T+1 ][ SYS_T ];
 	gf mask, inv, t;
 
-	//
+	/* // */
 
 	mat[0][0] = 1;
 
@@ -26,7 +26,7 @@ static int irr_gen(gf *out, gf *f)
 	for (j = 2; j <= SYS_T; j++)
 		GF_mul(mat[j], mat[j-1], f);
 
-	//
+	/* // */
 
 	for (j = 0; j < SYS_T; j++)
 	{
@@ -39,7 +39,7 @@ static int irr_gen(gf *out, gf *f)
 
 		}
 
-		if ( mat[ j ][ j ] == 0 ) // return if not systematic
+		if ( mat[ j ][ j ] == 0 ) /* // return if not systematic */
 		{
 			return -1;
 		}
@@ -71,8 +71,8 @@ int sk_gen(unsigned char *sk)
 {
 	int i;
 
-	gf g[ SYS_T ]; // irreducible polynomial
-	gf a[ SYS_T ]; // random element in GF(2^mt)
+	gf g[ SYS_T ]; /* // irreducible polynomial */
+	gf a[ SYS_T ]; /* // random element in GF(2^mt) */
 	
 	while (1)
 	{

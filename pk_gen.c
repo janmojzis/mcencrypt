@@ -18,7 +18,7 @@ int pk_gen(unsigned char * pk, unsigned char * sk)
 	gf L[ SYS_N ];
 	gf inv[ SYS_N ];
 
-	//
+	/* // */
 
 	g[ SYS_T ] = 1;
 
@@ -31,7 +31,7 @@ int pk_gen(unsigned char * pk, unsigned char * sk)
 	for (i = 0; i < SYS_N; i++)
 		inv[i] = gf_inv(inv[i]);
 
-	//
+	/* // */
 
 	for (i = 0; i < PK_NROWS; i++)
 	for (j = 0; j < SYS_N/8; j++)
@@ -59,7 +59,7 @@ int pk_gen(unsigned char * pk, unsigned char * sk)
 
 	}
 
-	//
+	/* // */
 
 	for (i = 0; i < (GFBITS * SYS_T + 7) / 8; i++)
 	for (j = 0; j < 8; j++)
@@ -80,7 +80,7 @@ int pk_gen(unsigned char * pk, unsigned char * sk)
 				mat[ row ][ c ] ^= mat[ k ][ c ] & mask;
 		}
 
-		if ( ((mat[ row ][ i ] >> j) & 1) == 0 ) // return if not systematic
+		if ( ((mat[ row ][ i ] >> j) & 1) == 0 ) /* // return if not systematic */
 		{
 			return -1;
 		}

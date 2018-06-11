@@ -36,7 +36,7 @@ gf gf_mul(gf in0, gf in1)
 	for (i = 1; i < GFBITS; i++)
 		tmp ^= (t0 * (t1 & (1 << i)));
 
-	//
+	/* // */
 
 	t = tmp & 0x1FF0000;
 	tmp ^= (t >> 9) ^ (t >> 10) ^ (t >> 12) ^ (t >> 13);
@@ -67,7 +67,7 @@ uint64_t gf_mul2(gf a, gf b0, gf b1)
 		mask += mask;
 	}
 
-	//
+	/* // */
 
 	t = tmp & 0x01FF000001FF0000;
 	tmp ^= (t >> 9) ^ (t >> 10) ^ (t >> 12) ^ (t >> 13);
@@ -190,14 +190,14 @@ gf gf_frac(gf den, gf num)
 	gf tmp_1111;
 	gf out;
 
-	tmp_11 = gf_sqmul(den, den); // 11
-	tmp_1111 = gf_sq2mul(tmp_11, tmp_11); // 1111
+	tmp_11 = gf_sqmul(den, den); /* // 11 */
+	tmp_1111 = gf_sq2mul(tmp_11, tmp_11); /* // 1111 */
 	out = gf_sq2(tmp_1111); 
-	out = gf_sq2mul(out, tmp_1111); // 11111111
+	out = gf_sq2mul(out, tmp_1111); /* // 11111111 */
 	out = gf_sq2(out);
-	out = gf_sq2mul(out, tmp_1111); // 111111111111
+	out = gf_sq2mul(out, tmp_1111); /* // 111111111111 */
 
-	return gf_sqmul(out, num); // 1111111111110
+	return gf_sqmul(out, num); /* // 1111111111110 */
 }
 
 gf gf_inv(gf den)
@@ -218,7 +218,7 @@ void GF_mul(gf *out, gf *in0, gf *in1)
 		for (j = 0; j < 128; j++)
 			prod[i+j] ^= gf_mul(in0[i], in1[j]);
 
-	//
+	/* // */
  
 	for (i = 254; i >= 128; i--)
 	{

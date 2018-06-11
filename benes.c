@@ -57,7 +57,7 @@ void apply_benes(unsigned char * r, const unsigned char * bits, int rev)
 	uint64_t b_int_v[64];
 	uint64_t b_int_h[64];
 
-	//
+	/* // */
 
 	if (rev) { bits_ptr = bits + 12288; inc = -1024; }
 	else     { bits_ptr = bits;         inc = 0;    }

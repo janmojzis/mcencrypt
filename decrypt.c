@@ -25,7 +25,7 @@ int decrypt(unsigned char *e, const unsigned char *sk, const unsigned char *c)
 
 	gf t;
 
-	//
+	/* // */
 
 	for (i = 0; i < SYND_BYTES; i++)       r[i] = c[i];
 	for (i = SYND_BYTES; i < SYS_N/8; i++) r[i] = 0;
@@ -40,7 +40,7 @@ int decrypt(unsigned char *e, const unsigned char *sk, const unsigned char *c)
 
 	root(images, locator, L);
 
-	//
+	/* // */
 	
 	for (i = 0; i < SYS_N/8; i++) 
 		e[i] = 0;

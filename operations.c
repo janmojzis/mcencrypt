@@ -21,7 +21,7 @@ int crypto_kem_mceliece8192128sha512_enc(
 	unsigned char conf[64];
     long long i;
 
-	//
+	/* // */
 
 	encrypt(c, pk, e);
 
@@ -54,7 +54,7 @@ int crypto_kem_mceliece8192128sha512_dec(
 	unsigned char *e = two_e + 1;
 	unsigned char preimage[ 1 + SYS_N/8 + (SYND_BYTES + 32) ];
 
-	//
+	/* // */
 
 	ret_decrypt = decrypt(e, sk + SYS_N/8, c);
 

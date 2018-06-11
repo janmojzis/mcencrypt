@@ -18,14 +18,14 @@ void bm(gf *out, gf *s)
 
 	gf b = 1, d, f;
 
-	//
+	/* // */
 
 	for (i = 0; i < SYS_T+1; i++)
 		C[i] = B[i] = 0;
 
 	B[1] = C[0] = 1;
 
-	//
+	/* // */
 
 	for (N = 0; N < 2 * SYS_T; N++)
 	{
