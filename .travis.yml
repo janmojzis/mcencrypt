@@ -17,3 +17,4 @@ script:
   - cd "$TRAVIS_BUILD_DIR"
   - make
   - make test
+  - make clean
