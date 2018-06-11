@@ -26,7 +26,10 @@ int checkfd(int fd, short event) {
         if (r == 1) break;
     }
     if (p.revents) return 1;
-    if (event == POLLOUT) write(fd, &ch, 1);
-    if (event == POLLIN) read(fd, &ch, 1);
+    /* catch errno */
+    if (event == POLLOUT)
+        r = write(fd, &ch, 1);
+    if (event == POLLIN)
+        r = read(fd, &ch, 1);
     return 0;
 }
