@@ -65,7 +65,7 @@ void die_perm(const char *name, const char *why) {
     _exit(100);
 }
 
-void die(int x) {
+void die_(int x) {
     cleanup();
     _exit(x);
 }
