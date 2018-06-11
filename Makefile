@@ -1,4 +1,5 @@
-CFLAGS+=-Wall -O3
+CC=gcc
+CFLAGS+=-Wall -O3 -funroll-loops -pedantic -Wno-long-long -Wshadow -Wdeclaration-after-statement -Wwrite-strings -Wundef -Wunused-value
 
 all:  _randreplace mcdecrypt mcencrypt mckeypair
 
@@ -112,9 +113,11 @@ mckeypair: mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_h
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o mckeypair mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_hash_sha512.o decrypt.o die.o e.o encrypt.o fsyncfd.o gf.o limits.o memreadall.o operations.o pk_gen.o poly1305.o randombytes.o readblock.o root.o sk_gen.o synd.o transpose.o util.o writeall.o
 
 clean:
-	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair
+	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair test.out
 
-test: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
+test.out: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
 	sh test.sh >test.out 2>&1 || { cat test.out; exit 1; }
 	cmp test.exp test.out || { diff -u test.exp test.out; exit 1; }
+
+test: test.out
 

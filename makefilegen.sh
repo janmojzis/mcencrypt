@@ -10,8 +10,8 @@ cp *.c *.h "${build}"
 (
   cd "${build}"
   (
-    #echo "CC=gcc"
-    echo "CFLAGS+=-Wall -O3"
+    echo "CC=gcc"
+    echo "CFLAGS+=-Wall -O3 -funroll-loops -pedantic -Wno-long-long -Wshadow -Wdeclaration-after-statement -Wwrite-strings -Wundef -Wunused-value"
     #echo "LDFLAGS+=-lz"
     echo 
 
@@ -48,12 +48,14 @@ cp *.c *.h "${build}"
     done
 
     echo "clean:"
-    echo -e "\trm -f *.o ${binaries}"
+    echo -e "\trm -f *.o ${binaries} test.out"
     echo 
 
-    echo "test: test.sh test.exp ${binaries}"
+    echo "test.out: test.sh test.exp ${binaries}"
     echo -e "\tsh test.sh >test.out 2>&1 || { cat test.out; exit 1; }"
     echo -e "\tcmp test.exp test.out || { diff -u test.exp test.out; exit 1; }"
+    echo
+    echo "test: test.out"
     echo
 
   ) > Makefile
