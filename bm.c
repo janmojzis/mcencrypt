@@ -53,7 +53,9 @@ void bm(gf *out, gf *s)
 
 		b = (b & ~mle) | (d & mle);
 
-		for (i = SYS_T; i >= 1; i--) B[i] = B[i-1]; B[0] = 0;
+		for (i = SYS_T; i >= 1; i--)
+			B[i] = B[i-1];
+		B[0] = 0;
 	}
 
 	for (i = 0; i <= SYS_T; i++)
