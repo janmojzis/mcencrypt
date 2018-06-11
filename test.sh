@@ -4,6 +4,15 @@ set -e
 LANG=C
 export LANG
 
+log="mcdecrypt - test if mcdecrypt decrypts test message"
+echo "${log}" 2>&1
+if [ "`./mcdecrypt < test.data.mc8 8<test.sk`" != "ahoj" ]; then
+  echo "${log} - failed" 2>&1
+  exit 1
+fi
+echo "${log} - ok" 2>&1
+echo 2>&1
+
 log="mckeypair - test if mckeypair handles closed filedescriptor 5"
 echo "${log}" 2>&1
 if ./mckeypair 9>sk; then

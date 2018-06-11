@@ -1,3 +1,6 @@
+mcdecrypt - test if mcdecrypt decrypts test message
+mcdecrypt - test if mcdecrypt decrypts test message - ok
+
 mckeypair - test if mckeypair handles closed filedescriptor 5
 mckeypair: usage: mckeypair 5>publickey 9>secretkey
 mckeypair: fatal: write publickey failed: file descriptor not open

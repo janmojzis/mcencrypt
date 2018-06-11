@@ -49,9 +49,11 @@ cp *.c *.h "${build}"
 
     echo "clean:"
     echo -e "\trm -f *.o ${binaries} test.out"
+    echo -e "\trm -rf build"
+    echo -e "\trm -f badpk badsk data data.mc8 data.mc8.corrupted data.new pk shortdata.mc8 sk"
     echo 
 
-    echo "test: test.sh test.exp ${binaries}"
+    echo "test: test.sh test.exp test.sk test.data.mc8 ${binaries}"
     echo -e "\tsh test.sh >test.out 2>&1 || { cat test.out; exit 1; }"
     echo -e "\tcmp test.exp test.out || { diff -u test.exp test.out; exit 1; }"
     echo

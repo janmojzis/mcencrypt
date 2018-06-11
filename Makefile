@@ -114,8 +114,10 @@ mckeypair: mckeypair.o  benes.o bm.o chacha20.o checkfd.o controlbits.o crypto_h
 
 clean:
 	rm -f *.o  _randreplace mcdecrypt mcencrypt mckeypair test.out
+	rm -rf build
+	rm -f badpk badsk data data.mc8 data.mc8.corrupted data.new pk shortdata.mc8 sk
 
-test: test.sh test.exp  _randreplace mcdecrypt mcencrypt mckeypair
+test: test.sh test.exp test.sk test.data.mc8  _randreplace mcdecrypt mcencrypt mckeypair
 	sh test.sh >test.out 2>&1 || { cat test.out; exit 1; }
 	cmp test.exp test.out || { diff -u test.exp test.out; exit 1; }
 
