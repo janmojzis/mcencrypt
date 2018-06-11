@@ -56,7 +56,7 @@ int decrypt(unsigned char *e, const unsigned char *sk, const unsigned char *c)
 
 	synd(s_cmp, g, L, e);
 
-	//
+	/* // */
 
 	check = w;
 	check ^= SYS_T;
