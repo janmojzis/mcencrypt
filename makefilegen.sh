@@ -51,11 +51,9 @@ cp *.c *.h "${build}"
     echo -e "\trm -f *.o ${binaries} test.out"
     echo 
 
-    echo "test.out: test.sh test.exp ${binaries}"
+    echo "test: test.sh test.exp ${binaries}"
     echo -e "\tsh test.sh >test.out 2>&1 || { cat test.out; exit 1; }"
     echo -e "\tcmp test.exp test.out || { diff -u test.exp test.out; exit 1; }"
-    echo
-    echo "test: test.out"
     echo
 
   ) > Makefile
