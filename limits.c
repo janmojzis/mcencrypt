@@ -9,12 +9,15 @@ static unsigned char randombyte[1];
 
 void limits(void) {
 
-    randombytes(randombyte,1);
-
 #ifdef RLIM_INFINITY
     struct rlimit r;
     r.rlim_cur = 0;
     r.rlim_max = 0;
+#endif
+
+    randombytes(randombyte, 1);
+
+#ifdef RLIM_INFINITY
 
 /* prohibit new files, new sockets, etc. */
 #ifdef RLIMIT_NOFILE
