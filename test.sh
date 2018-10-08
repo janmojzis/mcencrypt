@@ -6,7 +6,7 @@ export LANG
 
 log="mcdecrypt - test if mcdecrypt decrypts test message"
 echo "${log}" 2>&1
-if [ "`./mcdecrypt < test.data.mc8 8<test.sk`" != "ahoj" ]; then
+if [ x"`./mcdecrypt < test.data.mc8 8<test.sk`" != "xahoj" ]; then
   echo "${log} - failed" 2>&1
   exit 1
 fi
