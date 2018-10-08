@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
     }
     /* fallback to malloc(3) */
     if (!input) {
-        buf = memreadall(&inputlen, 0, 0, 0);
+        buf = memreadall(&inputlen, 0);
         if (!buf) die_temp(NAME, "read ciphertext failed");
         input = buf;
     }

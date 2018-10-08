@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 
     limits();
 
-    input = memreadall(&inputlen, 0, 0, 0);
+    input = memreadall(&inputlen, 0);
     if (!input) die_temp(NAME, "read message failed");
 
     randombytes(&a, sizeof a);
