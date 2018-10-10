@@ -30,7 +30,7 @@ umask 077
 mckeypair 5>pk 9>sk
 
 #encrypt tarball
-(cd somewhere; tar \-vjcf \- *) | mcencrypt 4<pk > data.tar.bz2.mc8
+(cd somewhere; tar \-vjcf \- *) | mcencrypt 4<pk >data.tar.bz2.mc8
 
 #decrypt tarball
 mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar \-vjxf \-)
