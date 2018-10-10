@@ -37,6 +37,12 @@ mckeypair 5>pk 9>sk
 #decrypt tarball
 mcdecrypt 8<sk <data.tar.bz2.mc8 | (cd somewhere; tar \-vjxf \-)
 .fi
+.SH CRYPTO
+.B mckeypair
+uses post-quantum safe crypto-algorithms:
+.TP
+mceliece8192128
+code-based public-key cryptosystem, see https://classic.mceliece.org
 .SH SEE ALSO
 .BR mcencrypt (1),
 .BR mcdecrypt (1),
