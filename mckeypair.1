@@ -9,10 +9,22 @@ randomly generates a secret key
 .B secretkey 
 and a corresponding public key
 .B publickey
-.SH SECRET KEY
+.TP
+.B secretkey
 14080 BYTES mceliece8192128 secret key
-.SH PUBLIC KEY
+.TP
+.B publickey
 1357824 BYTES mceliece8192128 public key
+.SS "exit status:"
+.TP
+0
+success
+.TP
+100
+permanent error
+.TP
+111
+temporary error
 .SH EXAMPLE
 .nf
 #create key\-pair

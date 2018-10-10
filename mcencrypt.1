@@ -11,14 +11,26 @@ using receivers publickey
 .B publickey
 and prints ciphertext
 .B ciphertext
-.SH CIPHERTEXT
+.TP
+.B ciphertext
 240 BYTES mceliece8192128 ciphertext
 .sp
 n BYTES chacha20 encrypted message
 .sp
 16 BYTES poly1305 authenticator
-.SH PUBLIC KEY
+.TP
+.B publickey
 1357824 BYTES mceliece8192128 public key
+.SS "exit status:"
+.TP
+0
+success
+.TP
+100
+permanent error
+.TP
+111
+temporary error
 .SH EXAMPLE
 .nf
 #create key\-pair

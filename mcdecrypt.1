@@ -15,14 +15,26 @@ and recovers message
 If decryption fails,
 .B mcdecrypt
 produces an empty output, prints an error message on stderr, and exits 100.
-.SH CIPHERTEXT
+.TP
+.B ciphertext
 240 BYTES mceliece8192128 ciphertext
 .sp
 n BYTES chacha20 encrypted message
 .sp
 16 BYTES poly1305 authenticator
-.SH SECRET KEY
+.TP
+.B secretkey
 14080 BYTES mceliece8192128 secret key
+.SS "exit status:"
+.TP
+0
+success
+.TP
+100
+permanent error
+.TP
+111
+temporary error
 .SH EXAMPLE
 .nf
 #create key\-pair
